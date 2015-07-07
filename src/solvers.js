@@ -15,30 +15,34 @@
 
 window.findNRooksSolution = function(n) {
   var solution = [];
-  var count = 0;
-  //iterate through the board
-  //next row check each colum for colume conflicts
-  //first colum that does not have a conflict, set to 0ne
-  //return solution
+  var indexes = [];
 
-  var recurse = function(element){
-    var arr = []
-    for(var i =0; i<element; i++){
-      if(arr.indexOf(1) === -1 && i === count){
-        arr.push(1);
-        count++;
+  var recurse = function(n){
+    var arr = [];
+    var index = Math.floor(Math.random() * n);
+    if(indexes.indexOf(index) !== -1){
+      recurse(n);
+    } else {
+      indexes.push(index);
+      for(var i =0; i<n; i++){
+        if(index === i){
+          arr.push(1)
         }else{
-        arr.push(0);
-      }
-    }
-  solution.push(arr);
-      if(solution.length !== n){
-        recurse(element);
+          arr.push(0);
+            }
+          }
+          solution.push(arr);
       }
 
+      if(solution.length<n){
+    recurse(n);
   }
+}
 
 recurse(n);
+
+
+
 
 console.log(solution);
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
