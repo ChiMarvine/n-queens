@@ -142,8 +142,22 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMajorDiagonalConflictAt: function(diag) {
+      var leftToRight = this.rows();
+      var found = null;
+
+
+      for(var i = 0; i < leftToRight.length; i++){
+        if(leftToRight[i][diag] === 1){
+          if(found === null){
+            found = diag+1;
+          }else if(diag===found){
+            return true;
+          }
+        }
+        diag++;
+        }
+      return false; 
     },
 
     // test if any major diagonals on this board contain conflicts
